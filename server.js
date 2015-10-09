@@ -6,7 +6,7 @@ var express     = require('express'),
     mongoose    = require('mongoose');
 
 server.get('/man-cave', function (req, res) {
-  res.write("Welcome to my amazing app");
+  res.write("<h1>Welcome to my amazing app</h1>");
   res.end();
 });
 
