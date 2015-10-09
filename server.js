@@ -7,7 +7,7 @@ var express     = require('express'),
 
 server.get('/man-cave', function (req, res) {
   res.write("Welcome to my amazing app");
-  res.end;
+  res.end();
 });
 
 mongoose.connect(MONGOURI + "/" + dbname);
