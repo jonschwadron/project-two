@@ -1,8 +1,12 @@
+<p>
+  I think you a word...
+</p>
+
 <form action="/comment/<%= comment._id %>?_method=PATCH" method="post">
-  <input type="text"
+  <!-- <input type="text"
          name="comment[author]"
          placeholder="author of comment, e.g. @shorty"
-         value="<%= comment.author %>"><br/>
+         value="<%= comment.author %>"><br/> -->
   <input type="text"
          name="comment[content]"
          placeholder="content of comment, limit 140 characters"

@@ -3,35 +3,37 @@
 </div> -->
 
 <% comments.forEach(function (comment) { %>
-  <div class="comment-box">
 
+  <div class="comment-box">
     <div class=author>
       <a href="/authors/<%= comment.author %>">
         <%= comment.author %>
       </a>
     </div>
 
-    <div>
+    <div class="content">
       <%= comment.content %>
     </div>
 
     <div class="post__options">
+      <!-- share button -->
+      <div class="post__button-share">
+        <a href=""><i class="fa fa-share-alt"></i></a>
+      </div>
+
       <!-- delete button -->
       <form class="post__button-delete"
             action="/comments/<%= comment._id %>?_method=DELETE"
             method="post">
-        <!-- fix this button below -->
-        <i class="fa fa-trash"></i>
+        <label for="icon-delete">
+          <i class="fa fa-trash"></i>
+        </label>
+        <input id="icon-delete" type=submit value="delete">
       </form>
 
       <!-- edit button -->
       <div class="post__button-edit">
         <a href="/comments/<%= comment._id %>/edit"><i class="fa fa-pencil-square-o"></i></a>
-      </div>
-
-      <!-- share button -->
-      <div class="post__button-share">
-        <a href=""><i class="fa fa-share-alt"></i></a>
       </div>
 
       <!-- comment button -->
@@ -45,10 +47,5 @@
       </div>
 
     </div>
-
-
-
-
-
   </div>
 <% }) %>

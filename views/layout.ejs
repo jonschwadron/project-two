@@ -12,23 +12,24 @@
 </head>
 <body>
 
+  <div class="header">
+      <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a href="/comments/" class="pure-menu-heading" href="/">Blah blah</a>
 
-    <div class="header">
-        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-          <a class="pure-menu-heading" href="/">Blah blah</a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="/comments/new" class="pure-menu-link">New</a></li>
+        <li class="pure-menu-item"><a href="/users/new" class="pure-menu-link">Sign up</a></li>
+        <li class="pure-menu-item"><a href="/users/login" class="pure-menu-link"><%= (typeof username !== 'undefined') ? "@"+username : "Login" %></a></li>
 
-        <ul class="pure-menu-list">
-          <li class="pure-menu-item"><a href="/comments/new" class="pure-menu-link">New</a></li>
-          <li class="pure-menu-item"><a href="#"><%= author ? "@" + author : "Sign up or Login" %></a></li>
-        </ul>
-      </div>
+      </ul>
     </div>
+  </div>
 
-    <div class="content-wrapper">
-      <div class="content">
-        <%- body %>
-      </div>
+  <div class="content-wrapper">
+    <div class="content">
+      <%- body %>
     </div>
+  </div>
 
 </body>
 </html>

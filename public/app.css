@@ -1,7 +1,4 @@
 /* Application wide style goes */
-
-
-
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -25,7 +22,7 @@ h4,
 h5,
 h6,
 label {
-    color: #34495e;
+    color: black;
 }
 
 .pure-img-responsive {
@@ -95,12 +92,12 @@ a.pure-button-primary {
  */
 
 .home-menu {
-    padding: 0.5em;
+    padding: 2em;
     text-align: center;
     box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
 }
 .home-menu {
-    background: #2d3e50;
+    background: rgba(0, 160, 235, 0.9);
 }
 .pure-menu.pure-menu-fixed {
     /* Fixed menus normally have a border at the bottom. */
@@ -110,7 +107,7 @@ a.pure-button-primary {
 }
 
 .home-menu .pure-menu-heading {
-    color: white;
+    color: rgb(65, 88, 105);
     font-weight: 400;
     font-size: 120%;
 }
@@ -120,7 +117,7 @@ a.pure-button-primary {
 }
 
 .home-menu a {
-    color: #6FBEF3;
+    color: black;
 }
 .home-menu li a:hover,
 .home-menu li a:focus {
@@ -177,6 +174,10 @@ a.pure-button-primary {
     opacity: 0.8;
 }
 
+/*.content {
+  margin-top: 70px;
+}*/
+
 /*
  * -- CONTENT STYLES --
  * This represents the content area (everything below the blue section)
@@ -184,11 +185,11 @@ a.pure-button-primary {
 .content-wrapper {
     /* These styles are required for the "scroll-over" effect */
     position: absolute;
-    top: 7%;
+    top: 10%;
     width: 100%;
     min-height: 12%;
     z-index: 2;
-    background: white;
+    background: rgba(255, 255, 255, 0.8);
 
 }
 
@@ -287,9 +288,12 @@ a.pure-button-primary {
 
 /*======================================*/
 .comment-box {
-  background-color: rgba(60, 60, 60, 0.25);
+  background-color: rgba(255, 255, 255, 0.9);
   padding: 15px 15px 15px 15px;
   margin: 15px 25px 15px 25px;
+  -webkit-box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.50);
+  -moz-box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.50);
+  box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.50);
 }
 
 .author {
@@ -325,6 +329,11 @@ a.pure-button-primary {
 .post__button-delete {
   float: right;
   margin: 3px;
+}
+
+#icon-delete,
+#icon-sign-in {
+    display: none;
 }
 
 .post__button-edit {

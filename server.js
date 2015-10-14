@@ -8,7 +8,13 @@ var express           = require('express'),
     mongoose          = require('mongoose'),
     session           = require('express-session');
 
-mongoose.connect('mongodb://localhost:27017/project-two');
+// mongoose.connect('mongodb://localhost:27017/project-two');
+
+var PORT = process.env.PORT || 3000,
+    MONGOURI = process.env.MONGOLAB_URI || 'mongodb://localhost:27017',
+    dbname = "project-two";
+
+mongoose.connect(MONGOURI + "/" + dbname);
 
 var Comment = mongoose.model("comment", {
   author: String,
@@ -39,34 +45,18 @@ server.use(function (req, res, next) {
   next();
 });
 
+
+
 var userController = require('./controllers/users.js');
 server.use('/users', userController);
 
-//catch all routes
-server.use(function (req, res, next) {
-  res.send("Your JOURNEY ends HERE, GRASShopper.");
-  //JOURNY, HERE, GRASS <--- why the emphasis on these?
-  res.end();
-})
+
+
 
 server.get('/', function (req, res) {
-  res.locals.author = undefined;
-  res.render('welcome');
-});
-
-server.post('/welcome', function (req, res) {
   req.session.authorName = req.body.authorName;
-  res.redirect(302, '/comments')
+  res.redirect(302, 'comments')
 });
-
-server.use(function (req, res, next) {
-  if (req.session.authorName == undefined) {
-    res.redirect(302, '/welcome')
-  } else {
-    res.locals.author = req.session.authorName;
-    next();
-  }
-})
 
 /* comment based routes */
 
@@ -81,6 +71,27 @@ server.get('/comments', function (req, res) {
     }
   });
 });
+
+//catch all routes
+// server.use(function (req, res, next) {
+//   res.send("Your JOURNEY ends HERE, GRASShopper.");
+//   //JOURNY, HERE, GRASS <--- why the emphasis on these?
+//   res.end();
+// })
+
+server.post('/welcome', function (req, res) {
+  req.session.authorName = req.body.authorName;
+  res.redirect(302, '/comments')
+});
+
+server.use(function (req, res, next) {
+  if (req.session.authorName == undefined) {
+    res.redirect(302, '/welcome')
+  } else {
+    res.locals.author = req.session.authorName;
+    next();
+  }
+})
 
 server.post('/comments', function (req, res) {
   var comment = new Comment({
@@ -124,7 +135,7 @@ server.patch('/comment/:id', function (req, res) {
     _id: commentID
   }, function (err, foundComment) {
     if (err) {
-console.log("NOT FOUND");
+      console.log("NOT FOUND");
     } else {
       foundComment.update(commentParams, function (errTwo, comment) {
         if (errTwo) {
@@ -173,6 +184,8 @@ server.get('/authors/:name', function (req, res) {
   });
 });
 
-server.listen(3000, function () {
+
+
+server.listen(PORT, function () {
   console.log("Server running on port 3000");
 });

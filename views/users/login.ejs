@@ -5,14 +5,19 @@
     <title>Log in</title>
   </head>
   <body>
-    <form action="/users" method="post">
+    <p>
+      Pls Login.
+    </p>
+    <form action="/users/login" method="post">
       <input type="text"
-             name="comment[author]"
+             name="user[username]"
              placeholder="username">
       <input type="password"
              name="user[password]"
              placeholder="password">
-      <input type="submit" value="Log in!">
+      <input id="icon-sign-in" type="submit" value="P">
+      <label for="icon-sign-in"><i class="fa fa-sign-in"></i></label>
+
     </form>
   </body>
 </html>
