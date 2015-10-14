@@ -1,0 +1,7 @@
+<a href="/comments">Back to tweets</a>
+
+<h1>Comments by: <%= author %></h1>
+
+<% comments.forEach(function (comment) { %>
+  <h3><%= comment.content %></h3>
+<% }) %>

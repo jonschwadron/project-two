@@ -1,0 +1,54 @@
+<!-- <div class="post-button">
+  <a href="/comments/new"><i class="fa fa-plus-square"></i></a>
+</div> -->
+
+<% comments.forEach(function (comment) { %>
+  <div class="comment-box">
+
+    <div class=author>
+      <a href="/authors/<%= comment.author %>">
+        <%= comment.author %>
+      </a>
+    </div>
+
+    <div>
+      <%= comment.content %>
+    </div>
+
+    <div class="post__options">
+      <!-- delete button -->
+      <form class="post__button-delete"
+            action="/comments/<%= comment._id %>?_method=DELETE"
+            method="post">
+        <!-- fix this button below -->
+        <i class="fa fa-trash"></i>
+      </form>
+
+      <!-- edit button -->
+      <div class="post__button-edit">
+        <a href="/comments/<%= comment._id %>/edit"><i class="fa fa-pencil-square-o"></i></a>
+      </div>
+
+      <!-- share button -->
+      <div class="post__button-share">
+        <a href=""><i class="fa fa-share-alt"></i></a>
+      </div>
+
+      <!-- comment button -->
+      <div class="post__button-comment">
+        <a href=""><i class="fa fa-comment"></i></a>
+      </div>
+
+      <!-- like button -->
+      <div class="post__button-like">
+        <a href=""></a><i class="fa fa-star"></i></a>
+      </div>
+
+    </div>
+
+
+
+
+
+  </div>
+<% }) %>

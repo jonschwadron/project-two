@@ -1,0 +1,8 @@
+<h3><%= author %> wants to make a new post!</h3>
+
+<form action="/comments" method="post">
+  <input type="textarea"
+         name="comment[content]"
+         placeholder="content of comment, limit 140 characters"><br/>
+  <input type="submit">
+</form>
