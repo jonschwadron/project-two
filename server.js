@@ -5,7 +5,7 @@ var express           = require('express'),
     expressEjsLayouts = require('express-ejs-layouts'),
     bodyParser        = require('body-parser'),
     methodOverride    = require('method-override'),
-    mongoose          = require('mongoose')
+    mongoose          = require('mongoose'),
     session           = require('express-session');
 
 mongoose.connect('mongodb://localhost:27017/project-two');
@@ -38,6 +38,16 @@ server.use(function (req, res, next) {
 
   next();
 });
+
+var userController = require('./controllers/users.js');
+server.use('/users', userController);
+
+//catch all routes
+server.use(function (req, res, next) {
+  res.send("Your JOURNEY ends HERE, GRASShopper.");
+  //JOURNY, HERE, GRASS <--- why the emphasis on these?
+  res.end();
+})
 
 server.get('/', function (req, res) {
   res.locals.author = undefined;
@@ -106,7 +116,7 @@ server.get('/comments/:id/edit', function (req, res) {
   });
 });
 
-server.patch('/comments/:id', function (req, res) {
+server.patch('/comment/:id', function (req, res) {
   var commentID = req.params.id;
   var commentParams = req.body.comment;
 
@@ -114,7 +124,7 @@ server.patch('/comments/:id', function (req, res) {
     _id: commentID
   }, function (err, foundComment) {
     if (err) {
-
+console.log("NOT FOUND");
     } else {
       foundComment.update(commentParams, function (errTwo, comment) {
         if (errTwo) {
