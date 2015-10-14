@@ -6,7 +6,7 @@ router.get('/new', function (req, res) {
   res.render('users/new');
 });
 
-router.post('/', function (req,res) {
+router.post('/new', function (req,res) {
   var newUser = User(req.body.user);
 
   newUser.save(function (err, user) {

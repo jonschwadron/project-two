@@ -41,17 +41,11 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use(function (req, res, next) {
   console.log("REQ DOT BODY", req.body);
   console.log("REQ DOT SESSION", req.session);
-
   next();
 });
 
-
-
 var userController = require('./controllers/users.js');
 server.use('/users', userController);
-
-
-
 
 server.get('/', function (req, res) {
   req.session.authorName = req.body.authorName;
@@ -59,7 +53,6 @@ server.get('/', function (req, res) {
 });
 
 /* comment based routes */
-
 server.get('/comments', function (req, res) {
   Comment.find({}, function (err, allComments) {
     if (err) {
@@ -79,14 +72,14 @@ server.get('/comments', function (req, res) {
 //   res.end();
 // })
 
-server.post('/welcome', function (req, res) {
-  req.session.authorName = req.body.authorName;
-  res.redirect(302, '/comments')
-});
+// server.post('/welcome', function (req, res) {
+//   req.session.authorName = req.body.authorName;
+//   res.redirect(302, '/comments')
+// });
 
 server.use(function (req, res, next) {
   if (req.session.authorName == undefined) {
-    res.redirect(302, '/welcome')
+    res.redirect(302, '/users/new')
   } else {
     res.locals.author = req.session.authorName;
     next();

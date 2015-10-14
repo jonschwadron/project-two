@@ -5,31 +5,26 @@
   <title>Post something interesting</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/app.css">
-
 </head>
-<body>
 
+<body>
   <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
       <a href="/comments/" class="pure-menu-heading" href="/">Blah blah</a>
-
       <ul class="pure-menu-list">
         <li class="pure-menu-item"><a href="/comments/new" class="pure-menu-link">New</a></li>
         <li class="pure-menu-item"><a href="/users/new" class="pure-menu-link">Sign up</a></li>
         <li class="pure-menu-item"><a href="/users/login" class="pure-menu-link"><%= (typeof username !== 'undefined') ? "@"+username : "Login" %></a></li>
-
       </ul>
     </div>
   </div>
-
   <div class="content-wrapper">
     <div class="content">
       <%- body %>
     </div>
   </div>
-
 </body>
 </html>
 <!-- Default site-wide shell -->
