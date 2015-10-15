@@ -38,25 +38,56 @@ server.use(methodOverride('_method'));
 
 server.use(bodyParser.urlencoded({ extended: true }));
 
-server.use(function (req, res, next) {
-  console.log("REQ DOT BODY", req.body);
-  console.log("REQ DOT SESSION", req.session);
+server.use(function(req, res, next) { // MEGA LOGGER
+  console.log("=========== BEGIN LOGGER ===========");
+  console.log("req.body:   ", req.body);
+  console.log("req.query:  ", req.query);
+  console.log("req.params: ", req.params);
+  console.log("===========  END LOGGER  ===========");
   next();
 });
 
 var userController = require('./controllers/users.js');
 server.use('/users', userController);
 
+server.use(function (req, res, next) {
+  if (req.session.currentUser == undefined) {
+    res.redirect(302, '/users/login')
+  } else {
+    res.locals.currentUser = req.session.currentUser;
+    next();
+  }
+});
+
+// server.get('/welcome', function (req, res) {
+//   if (req.session.currentUser) {
+//     res.render('welcome', {
+//       currentUser: req.session.currentUser
+//     });
+//   } else {
+//     res.redirect(301, '/user/login')
+//   }
+// });
+
 server.get('/', function (req, res) {
-  req.session.authorName = req.body.authorName;
   res.redirect(302, 'comments')
 });
+
+server.get('/logout', function (req, res) {
+  req.session.destroy(function(){
+      res.redirect(302, '/');
+    });
+});
+
+
+
+
 
 /* comment based routes */
 server.get('/comments', function (req, res) {
   Comment.find({}, function (err, allComments) {
     if (err) {
-      res.redirect(302, '/welcome');
+      res.redirect(302, '/');
     } else {
       res.render('comments/index', {
         comments: allComments
@@ -77,18 +108,11 @@ server.get('/comments', function (req, res) {
 //   res.redirect(302, '/comments')
 // });
 
-server.use(function (req, res, next) {
-  if (req.session.authorName == undefined) {
-    res.redirect(302, '/users/new')
-  } else {
-    res.locals.author = req.session.authorName;
-    next();
-  }
-})
+
 
 server.post('/comments', function (req, res) {
   var comment = new Comment({
-    author: req.session.authorName,
+    author: req.session.currentUser,
     content: req.body.comment.content
   });
 

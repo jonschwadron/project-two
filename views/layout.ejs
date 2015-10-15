@@ -12,11 +12,21 @@
 <body>
   <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-      <a href="/comments/" class="pure-menu-heading" href="/">Blah blah</a>
+      <a href="/comments/" class="pure-menu-heading">Blah blah</a>
       <ul class="pure-menu-list">
         <li class="pure-menu-item"><a href="/comments/new" class="pure-menu-link">New</a></li>
+
+        <%if (typeof currentUser == 'undefined') { %>
         <li class="pure-menu-item"><a href="/users/new" class="pure-menu-link">Sign up</a></li>
-        <li class="pure-menu-item"><a href="/users/login" class="pure-menu-link"><%= (typeof username !== 'undefined') ? "@"+username : "Login" %></a></li>
+        <% } %>
+
+        <li class="pure-menu-item"><a href="/users/login" class="pure-menu-link"><%= (typeof currentUser !== 'undefined') ? "@"+currentUser : "Login" %></a></li>
+
+        <%if (typeof currentUser !== 'undefined') { %>
+          <li class="pure-menu-item"><a href="/logout" class="pure-menu-link">Log out</a></li>
+        <% } %>
+
+
       </ul>
     </div>
   </div>
@@ -28,3 +38,5 @@
 </body>
 </html>
 <!-- Default site-wide shell -->
+
+<!--  -->
