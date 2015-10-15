@@ -14,9 +14,11 @@
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
       <a href="/comments/" class="pure-menu-heading">Blah blah</a>
       <ul class="pure-menu-list">
+
+
         <li class="pure-menu-item"><a href="/comments/new" class="pure-menu-link">New</a></li>
 
-        <%if (typeof currentUser == 'undefined') { %>
+        <% if (typeof currentUser == 'undefined') { %>
         <li class="pure-menu-item"><a href="/users/new" class="pure-menu-link">Sign up</a></li>
         <% } %>
 

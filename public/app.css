@@ -98,6 +98,10 @@ a.pure-button-primary {
 }
 .home-menu {
     background: rgba(0, 160, 235, 0.9);
+    -webkit-box-shadow: inset 0px 0px 201px 1px rgba(255,255,255,1);
+    -moz-box-shadow: inset 0px 0px 201px 1px rgba(255,255,255,1);
+    box-shadow: inset 0px 0px 201px 1px rgba(255,255,255,1);
+
 }
 .pure-menu.pure-menu-fixed {
     /* Fixed menus normally have a border at the bottom. */
@@ -185,7 +189,7 @@ a.pure-button-primary {
 .content-wrapper {
     /* These styles are required for the "scroll-over" effect */
     position: absolute;
-    top: 20%;
+    top: 100px;
     width: 100%;
     min-height: 12%;
     z-index: 2;

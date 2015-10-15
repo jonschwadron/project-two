@@ -1,8 +1,18 @@
-<h3><%= currentUser %> wants to make a new post!</h3>
+<!-- <h3><%= currentUser %> </h3> -->
+
+<h3>Create a new post</h3>
+
 
 <form action="/comments" method="post">
-  <input type="textarea"
+  <!-- <input id="theCommentBox"
+          type="text"
          name="comment[content]"
-         placeholder="content of comment, limit 140 characters"><br/>
+         placeholder="say something funny"><br/> -->
+
+
+  <textarea name="comment[content]"
+            placeholder="say something funny!"
+            cols="50"
+            rows="5"></textarea><br>
   <input type="submit">
 </form>
