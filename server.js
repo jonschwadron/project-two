@@ -18,7 +18,15 @@ mongoose.connect(MONGOURI + "/" + dbname);
 
 var Comment = mongoose.model("comment", {
   author: String,
-  content: { type: String, maxlength: 140 }
+  content: { type: String, maxlength: 140 },
+  replies: [{ replymessage: String,
+              date: { type: Date,
+                      default: Date.now },
+              author: String
+           }],
+  date: { type: Date, default: Date.now },
+  hidden: Boolean,
+  upvote: {type: Number, default: 0}
 });
 
 server.set('view engine', 'ejs');
@@ -79,10 +87,6 @@ server.get('/logout', function (req, res) {
     });
 });
 
-
-
-
-
 /* comment based routes */
 server.get('/comments', function (req, res) {
   Comment.find({}, function (err, allComments) {
@@ -90,8 +94,33 @@ server.get('/comments', function (req, res) {
       res.redirect(302, '/');
     } else {
       res.render('comments/index', {
-        comments: allComments
+        comments: allComments,
+
       });
+    }
+  });
+});
+
+
+
+server.post('/comments/:id/reply', function (req, res) {
+  // fetch the comment by this id, set it to comment
+  // create reply object
+  // push reply object into comment
+  // save comment into db
+  // i know the problem now. lol
+  var commentID = req.params.id;
+  console.log(req.body.comment.replymessage);
+  Comment.findByIdAndUpdate(
+    commentID,
+    {$push: {"replies": { "author": req.session.currentUser, "replymessage": req.body.comment.replymessage }}},
+    function(err, newComment){
+    if(err){
+      console.log("bad comment id");
+      res.redirect(302, '/comments/' + commentID + 'reply')
+    }else {
+      console.log(newComment);
+      res.redirect(302, '/comments/' + commentID);
     }
   });
 });
@@ -108,21 +137,40 @@ server.get('/comments', function (req, res) {
 //   res.redirect(302, '/comments')
 // });
 
+server.patch('/comments/:id/upvote'), function (req, res) {
+  var commentID = req.params.id;
 
+
+  console.log("yessss");
+  Comment.findOne({
+    _id: commentID
+  }, function (err, upVoteUpdate) {
+    if (err) {
+      console.log("bad id");
+    } else {
+      console.log("about to upvote " + upVoteUpdate);
+      upVoteUpdate.upvote.$inc;
+      upVoteUpdate.save();
+      // need to redirect to same page as it was before?
+      res.redirect(302, '/comments/' + commentID);
+    }
+  });
+};
 
 server.post('/comments', function (req, res) {
+  var currentDate = Date();
   var comment = new Comment({
     author: req.session.currentUser,
     content: req.body.comment.content
   });
 
-  comment.save(function (err, newTweet) {
+  comment.save(function (err, newComment) {
     if (err) {
       console.log("Comment rejected");
       res.redirect(302, '/comments/new');
     } else {
       console.log("New comment saved!");
-      res.redirect(302, '/comments');
+      res.redirect(302, '/comments/');
     }
   });
 });
@@ -182,6 +230,35 @@ server.delete('/comments/:id', function (req, res) {
 
 server.get('/comments/new', function (req, res) {
   res.render('comments/new');
+});
+
+server.get('/comments/:id/reply', function (req, res) {
+  res.render('comments/reply', {
+    // here you pass the request parameter id to reply.ejs as commentId
+    commentId: req.params.id
+  }); //opens reply.ejs
+
+});
+
+server.get('/comments/:id', function (req, res) {
+  var selectComment = req.params.id;
+  // var allTheReplies = req.
+  Comment.findOne({
+    _id: selectComment
+  }, function (err, specificComment) {
+    if (err) {
+
+    } else {
+      console.log("displaying: "+specificComment.replies);
+      // console.log("is it string?" + typeof specificComment !== "string");
+      res.render('comments/show', {
+        comment: specificComment
+      });
+    }
+  });
+  // whats the diff between render and redirect? think it might be important
+  //redirect just take you to the ejs page
+  //render displays the view with data passed to it
 });
 
 server.get('/authors/:name', function (req, res) {

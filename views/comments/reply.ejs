@@ -1,0 +1,9 @@
+<h3>Reply to comment</h3>
+
+<form action="/comments/<%= commentId %>/reply" method="post">
+  <textarea name="comment[replymessage]"
+            placeholder="reply with a compliment"
+            cols="50"
+            rows="5"></textarea><br>
+  <input type="submit">
+</form>

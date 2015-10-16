@@ -321,7 +321,7 @@ a.pure-button-primary {
   margin: 3px;
 }
 
-.post__button-comment {
+.post__button-reply {
   float: right;
   margin: 3px;
 }
@@ -337,7 +337,8 @@ a.pure-button-primary {
 }
 
 #icon-delete,
-#icon-sign-in {
+#icon-sign-in,
+#icon-star {
     display: none;
 }
 

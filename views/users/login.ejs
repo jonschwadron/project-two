@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Log in</title>
-  </head>
-  <body>
-    <p>
-      Pls Login.
-    </p>
-    <form action="/users/login" method="post">
-      <input type="text"
-             name="user[username]"
-             placeholder="username">
-      <input type="password"
-             name="user[password]"
-             placeholder="password">
-      <input id="icon-sign-in" type="submit" value="P">
-      <label for="icon-sign-in"><i class="fa fa-sign-in"></i></label>
+<p>Pls Login.</p>
 
-    </form>
-  </body>
-</html>
+<form action="/users/login" method="post">
+  <input type="text"
+         name="user[username]"
+         placeholder="username">
+  <input type="password"
+         name="user[password]"
+         placeholder="password">
+  <input id="icon-sign-in" type="submit">
+  <label for="icon-sign-in"><i class="fa fa-sign-in"></i></label>
+
+</form>
