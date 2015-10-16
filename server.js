@@ -137,23 +137,38 @@ server.post('/comments/:id/reply', function (req, res) {
 //   res.redirect(302, '/comments')
 // });
 
+// server.patch('/comments/:id/upvote', function (req, res) {
+//   var commentID = req.params.id;
+//
+//
+//   console.log("yessss");
+//   Comment.findOne({
+//     _id: commentID
+//   }, function (err, upVoteUpdate) {
+//     if (err) {
+//       console.log("bad id");
+//     } else {
+//       console.log("about to upvote " + upVoteUpdate);
+//       upVoteUpdate.upvote.$inc;
+//       upVoteUpdate.save();
+//       // need to redirect to same page as it was before?
+//       res.redirect(302, '/comments/' + commentID);
+//     }
+//   });
+// });
+
 server.patch('/comments/:id/upvote', function (req, res) {
   var commentID = req.params.id;
 
-
-  console.log("yessss");
-  Comment.findOne({
-    _id: commentID
-  }, function (err, upVoteUpdate) {
-    if (err) {
-      console.log("bad id");
-    } else {
-      console.log("about to upvote " + upVoteUpdate);
-      upVoteUpdate.upvote.$inc;
-      upVoteUpdate.save();
-      // need to redirect to same page as it was before?
-      res.redirect(302, '/comments/' + commentID);
-    }
+  Comment.findByIdAndUpdate(
+    commentID,
+    { $inc: { upvote: 1 } },
+    function (err, upVoteUpdate) {
+      if (err) {
+        console.log("bad id");
+      } else {
+        res.redirect(302, '/comments/');
+      }
   });
 });
 
