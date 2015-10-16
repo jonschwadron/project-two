@@ -137,7 +137,7 @@ server.post('/comments/:id/reply', function (req, res) {
 //   res.redirect(302, '/comments')
 // });
 
-server.patch('/comments/:id/upvote'), function (req, res) {
+server.patch('/comments/:id/upvote', function (req, res) {
   var commentID = req.params.id;
 
 
@@ -155,7 +155,7 @@ server.patch('/comments/:id/upvote'), function (req, res) {
       res.redirect(302, '/comments/' + commentID);
     }
   });
-};
+});
 
 server.post('/comments', function (req, res) {
   var currentDate = Date();
